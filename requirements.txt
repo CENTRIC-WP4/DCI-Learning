@@ -1,0 +1,7 @@
+matplotlib==3.5.3
+numpy==1.21.6
+pandas==1.3.5
+sionna==0.13.0
+tensorflow==2.11.0
+torch==1.13.1
+tqdm==4.65.0
