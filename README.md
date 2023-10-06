@@ -1,10 +1,10 @@
 # Downlink Control Information (DCI) Learning
-Author: Bryan Liu - Nokia Network France
+Author: Bryan Liu - Nokia Networks France
 
 This repository generates random correlated binary sequences that might be used to form a DCI message. 
 The encoding and decoding steps follow 5G New Radio 3GPP standards.
 
-Most of the codes are written based on the following resources:
+Most of the code is based on the following resources:
 * https://github.com/vodafone-chair/5g-nr-polar/tree/master
 * https://nvlabs.github.io/sionna/
 * https://uk.mathworks.com/help/lte/ug/reporting-of-channel-quality-indicator-cqi-conformance-test.html
@@ -21,9 +21,9 @@ DCI payload is a 2D array with a shape of (number of TTIs, DCI payload length)
 Encoded DCI message is a 2D array with a shape of (number of TTIs, encoded DCI length)
 
 ### Folders
-* **pdcch**: following the 5GNR standards, a DCI message in this code repository is encoded by the steps of 
+* **pdcch**: following 5GNR standards, the encoding of a DCI message in this repository consists in the following steps: 
   * CRC attachment
-  * CRC scramling
+  * CRC scrambling
   * Interleaving
   * Polar encoding
   * Rate matching
