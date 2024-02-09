@@ -25,7 +25,7 @@ Encoded DCI message is a 2D array with a shape of (number of TTIs, encoded DCI l
 
 Corresponding compressed DCI messages for the test dataset with baseline algorithms, Huffman Coding or Lempel-Ziv-Welch, are generated.
 
-![alt text](example_output.png)
+![An example of output figure](example_output.png)
 
 ## Getting started
 1. Get the code:
