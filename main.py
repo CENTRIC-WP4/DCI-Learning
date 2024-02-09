@@ -66,7 +66,7 @@ if __name__ == "__main__":
     ]
 
     ## here the stats are collected after all the data have been compressed.
-    ## -1 is added as the null space for the compressed data
+    ## a value of "2" is appended as the null space for the compressed data
     compression_stats = CompressionStatisticCollector(args.baseline)
     for compressed, test_data in compressed_DCI:
         for i in range(len(compressed)):

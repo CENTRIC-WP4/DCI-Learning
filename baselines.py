@@ -1,6 +1,6 @@
 """
 This file contains lossless compression methods: Lempel-Ziv-Welch and Huffman Coding
-Most of the functions are be found from the open Github repositories:
+Most of the functions can be found from the open Github repositories:
 * Huffman coding: https://github.com/bhrigu123/huffman-coding
 * Lempel-Ziv-Welch: https://github.com/stensaethf/Lempel-Ziv-Welch-Compressor
 """
@@ -443,6 +443,11 @@ class CompressionStatisticCollector:
         ax1.set_xticklabels(self.stats_df["idx"].iloc[ticks])
         ax2.set_xticks(ticks)
         ax2.set_xticklabels(self.stats_df["idx"].iloc[ticks])
+        ax1.set_xlabel('Index')
+        ax1.set_ylabel('Source Data')
+        ax2.set_xlabel('Index')
+        ax2.set_ylabel('Compressed Data')
+
         plt.tight_layout()
         plt.savefig(f"{saver_directory}/stats_plot_{self.name}.pdf", dpi=500)
         plt.close(fig)
