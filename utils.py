@@ -63,7 +63,7 @@ def options():
     )
     parser.add_argument(
         "--activation_ratios",
-        default=0.3,
+        default=0.2,
         type=float,
         help="random bits activation ratios",
     )
@@ -90,5 +90,11 @@ def options():
         default=4,
         type=int,
         help="Es/N0 for the control channel",
+    )
+    parser.add_argument(
+        "--baseline",
+        default="HC",
+        type=str,
+        help="Choose from HC (Huffman Coding) or LZW (Lempel-Ziv-Welch)"
     )
     return parser

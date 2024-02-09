@@ -7,7 +7,11 @@ from control_bits.channel_model import CDLModel
 import utils
 import sys
 import os
-
+from baselines import (
+    lossless_compression,
+    train_test_split,
+    CompressionStatisticCollector,
+)
 
 if __name__ == "__main__":
     ## initialize all the system parameters
@@ -55,3 +59,21 @@ if __name__ == "__main__":
         args.esn0_control,
     )
     DCI_UE, encoded_message_UE = bts.generate_new_epoch()
+
+    source_data = [train_test_split(x) for x in DCI_UE.values()]
+    compressed_DCI = [
+        (lossless_compression(args.baseline, s[0], s[1]), s[1]) for s in source_data
+    ]
+
+    ## here the stats are collected after all the data have been compressed.
+    ## -1 is added as the null space for the compressed data
+    compression_stats = CompressionStatisticCollector(args.baseline)
+    for compressed, test_data in compressed_DCI:
+        for i in range(len(compressed)):
+            compression_stats.add(
+                len(compression_stats.stats_df.index) + 1,
+                test_data[i],
+                compressed[i],
+                test_data[i].shape[0] - len(compressed[i]),
+            )
+    compression_stats.plot_heatmap(saver_directory)
