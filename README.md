@@ -10,7 +10,7 @@ There are 4 types of methods for generating (un)correlated random control bits.
 * **KDependent**: adjacent K bits are correlated following a preset vector of correlation coefficient.
 * **OneDependent**: adjacent 2 bits are correlated following a preset correlation coefficient.
 * **DecayingProduct**: the closer the indices of the bits, the higher the correlation between the bits.
-* **Random**: binary uncorrelated bits are generated
+* **Random**: binary uncorrelated bits are generated.
 
 Besides generating the (un)correlated binary sequences, there is a built-in non-contiguous even resource scheduler, 
 which allocates equal number of resources to the User Equipments (UEs).
@@ -63,10 +63,10 @@ There are two main ways of contributing to this repository
 Under various system models, the DCI messages should follow different patterns. 
 E.g., introducing a different channel model and traffic model would return DCI messages with different distributions.
 There are multiple fields in a DCI message that can be added to the repository, 
-e.g., introducing a closed-loop power control command is included in a DCI message
+e.g., introducing a closed-loop power control command.
 2. **Implementing new solutions**: 
 Lossless data compression is an on-going research topic. 
-In particular, with the assistance of machine learning, the distribution of source data symbols might be better estimated to achieve a higher compression ratio
+In particular, with the assistance of machine learning, the distribution of source data symbols might be better estimated to achieve a higher compression ratio.
 
 ## References
 * [5G-NR Polar Coding](https://github.com/vodafone-chair/5g-nr-polar/tree/master)
