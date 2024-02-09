@@ -443,9 +443,9 @@ class CompressionStatisticCollector:
         ax1.set_xticklabels(self.stats_df["idx"].iloc[ticks])
         ax2.set_xticks(ticks)
         ax2.set_xticklabels(self.stats_df["idx"].iloc[ticks])
-        ax1.set_xlabel('Index')
+        ax1.set_xlabel('DCI Index')
         ax1.set_ylabel('Source Data')
-        ax2.set_xlabel('Index')
+        ax2.set_xlabel('DCI Index')
         ax2.set_ylabel('Compressed Data')
 
         plt.tight_layout()

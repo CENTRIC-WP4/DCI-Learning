@@ -7,7 +7,7 @@ def options():
         description="Randomly generate DCI message and encode by Polar codes"
     )
     parser.add_argument("--payload_length", default=70, type=int, help="Payload Length")
-    parser.add_argument("--num_TTIs", default=40, type=int, help="Number of TTIs")
+    parser.add_argument("--num_TTIs", default=60, type=int, help="Number of TTIs")
     parser.add_argument(
         "--encoded_length", default=128, type=int, help="Encoded DCI length"
     )
