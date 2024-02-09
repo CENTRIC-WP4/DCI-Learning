@@ -1,10 +1,9 @@
 # Downlink Control Information (DCI) Learning
-Author: Bryan Liu - Nokia Network France
+Author: Bryan Liu - Nokia Networks France
 
 This repository generates random correlated binary sequences that might be used to form a DCI message. 
 The encoding and decoding steps follow 5G New Radio 3GPP standards.
 This repository might be used to test compression methods for customized DCI messages.
-
 
 ## Overview
 There are 4 types of methods for generating (un)correlated random control bits.
@@ -78,3 +77,4 @@ In particular, with the assistance of machine learning, the distribution of sour
 
 ## License
 This project is licensed under the BSD-3-Clause license - see the [LICENSE](https://github.com/CENTRIC-WP4/DCI-Learning?tab=BSD-3-Clause-1-ov-file#readme)
+
