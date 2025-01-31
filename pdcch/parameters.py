@@ -263,7 +263,7 @@ def get_3GPP_info_bit_pattern(I, Q_N, rate_matching_pattern, mode):
             )
 
     ## order matters, Itmp -> actual information position
-    Q_Itmp_N = np.array([el for el in Q_N if el not in Q_Ftmp_N], dtype=np.int)
+    Q_Itmp_N = np.array([el for el in Q_N if el not in Q_Ftmp_N], dtype=int)
 
     if len(Q_Itmp_N) < I:
         raise ValueError("Too many pre-frozen bits")
@@ -332,13 +332,13 @@ def get_3GPP_rate_matching_pattern(K, N, E):
 
     d = np.arange(N)
 
-    J = np.zeros((N), dtype=np.int)
-    y = np.zeros((N), dtype=np.int)
+    J = np.zeros((N), dtype=int)
+    y = np.zeros((N), dtype=int)
     for n in range(0, N):
         i = np.floor(32 * n / N).astype(int)
         J[n] = int(P[i] * (N / 32)) + int(np.mod(n, int(N / 32)))
         y[n] = d[J[n]]
-    rate_matching_pattern = np.zeros(E, dtype=np.int)
+    rate_matching_pattern = np.zeros(E, dtype=int)
     if E >= N:
         for k in range(0, E):
             rate_matching_pattern[k] = y[np.mod(k, N)]
@@ -414,7 +414,7 @@ def get_3GPP_crc_interleaver_pattern(K):
             "K should be no greater than 224.",
         )
 
-    Pi = np.zeros((K), dtype=np.int)
+    Pi = np.zeros((K), dtype=int)
     k = 0
     for m in range(len(Pi_IL_max)):
         if Pi_IL_max[m] >= len(Pi_IL_max) - K:

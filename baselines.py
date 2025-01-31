@@ -3,6 +3,7 @@ This file contains lossless compression methods: Lempel-Ziv-Welch and Huffman Co
 Most of the functions can be found from the open Github repositories:
 * Huffman coding: https://github.com/bhrigu123/huffman-coding
 * Lempel-Ziv-Welch: https://github.com/stensaethf/Lempel-Ziv-Welch-Compressor
+* pre-trained DNN model: https://github.com/mohit1997/DeepZip
 """
 
 import heapq
@@ -10,6 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
 import pandas as pd
+from ml_compressor.deepzip import DeepZipDNN, DataGenerator
 
 
 def string2bits(s=""):
@@ -337,27 +339,34 @@ def lossless_compression(method, train_x, test_x):
     """
     if method == "LZW":
         compressor = LZW()
+        compressor.update_dictionary(train_x)
     elif method == "HC":
         compressor = Huffman_coding()
+        compressor.update_dictionary(train_x)
+    elif method == "DNN":
+        ## hard-coded, try to train your own model to improve the performance
+        window_length = 5
+        payload_length = train_x.shape[-1]
+        feature_length =  payload_length * window_length + payload_length - 1
+        compressor = DeepZipDNN(data_generator=None, feature_length=feature_length)
+        compressor.load_models("././")
     else:
         raise ValueError("Please select a valid compression method")
 
-    ## FIXME: may consider reducing the number of training data for LZW
-    compressor.update_dictionary(train_x)
 
     ## Huffman coding and LZW are dictionary based lossless compression methods, combine
     ## both train and test dataset to setup the dictionary
     decompressed = []
     compressed = []
     for x in test_x:
-        c = compressor.compress(x)
+        c = compressor.compress(x) if method != "DNN" else None
         if method == "HC":
             binary_array = bin_to_array(compressor.byte_to_bit_string(c))
             compressed.append(binary_array)
         elif method == "LZW":
             compressed.append(c)
         else:
-            pass
+            break
 
         ## assume that no compression is needed if the compressed data exceeds original length
         if len(compressed[-1]) > test_x.shape[-1]:
@@ -366,6 +375,10 @@ def lossless_compression(method, train_x, test_x):
         ## crop the decompressed sequence if the number of bits does not form a byte
         num_paddings = 8 - test_x.shape[-1] % 8
         decompressed.append(compressor.decompress(c)[:-num_paddings])
+    if method == "DNN":
+        compressed = compressor.compress(test_x)
+        decompressed = compressor.decompress(compressed, test_x.shape[-1], window_length)
+
     assert (np.vstack(decompressed) == test_x).all(), "Compression failed"
     return compressed
 
@@ -432,7 +445,7 @@ class CompressionStatisticCollector:
 
         original = np.concatenate([self.stats_df["original"].to_list()], axis=0)
         compressed = np.concatenate([self.stats_df["compressed"].to_list()], axis=0)
-        fig, (ax1, ax2) = plt.subplots(2, 1, sharey=True)
+        fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
 
         ax1.imshow(original.T, cmap="Blues", interpolation="nearest", vmin=0, vmax=2)
         ax2.imshow(compressed.T, cmap="Blues", interpolation="nearest", vmin=0, vmax=2)
@@ -449,5 +462,5 @@ class CompressionStatisticCollector:
         ax2.set_ylabel('Compressed Data')
 
         plt.tight_layout()
-        plt.savefig(f"{saver_directory}/stats_plot_{self.name}.pdf", dpi=500)
+        plt.savefig(f"{saver_directory}/stats_plot_{self.name}.png", dpi=500)
         plt.close(fig)

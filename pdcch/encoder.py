@@ -58,7 +58,7 @@ class PDCCHEncoder(ParametersPDCCH):
 
         # Position the information and CRC bits within the input to the polar
         # encoder kernal.
-        u = np.zeros((self.N), dtype=np.int)  ## initialize with all-zeros
+        u = np.zeros((self.N), dtype=int)  ## initialize with all-zeros
         u[self.info_bit_pattern] = c  ## select the most reliable positions
 
         # Perform the polar encoder kernal operation.

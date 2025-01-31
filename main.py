@@ -1,7 +1,7 @@
 from pdcch.parameters import ParametersPDCCH
 from pdcch.encoder import PDCCHEncoder
 from pdcch.decoder import PDCCHDecoder
-from sionna.fec.polar import PolarSCDecoder, PolarSCLDecoder, PolarBPDecoder
+from sionna.fec.polar import PolarSCLDecoder
 from control_bits.system import UserEquipment, BTS, EvenResourcesNonContiguous
 from control_bits.channel_model import CDLModel
 import utils
@@ -59,8 +59,8 @@ if __name__ == "__main__":
         args.esn0_control,
     )
     DCI_UE, encoded_message_UE = bts.generate_new_epoch()
-
     source_data = [train_test_split(x) for x in DCI_UE.values()]
+
     compressed_DCI = [
         (lossless_compression(args.baseline, s[0], s[1]), s[1]) for s in source_data
     ]

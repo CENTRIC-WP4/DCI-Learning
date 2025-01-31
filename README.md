@@ -33,7 +33,7 @@ Corresponding compressed DCI messages for the test dataset with baseline algorit
     git clone https://github.com/CENTRIC-WP4/DCI-Learning
     ```
 
-2. Use `pip3` to install the package:
+2. Use `pip3` to install the package (Python 3.9):
    ```
    pip3 install -r requirements.txt
    ```
@@ -44,9 +44,13 @@ Corresponding compressed DCI messages for the test dataset with baseline algorit
    ```
 
 ## Baselines
-Two baselines are provided for lossless data compression.
+Three baselines are provided for lossless data compression.
 * [Lempel-Ziv-Welch](https://github.com/stensaethf/Lempel-Ziv-Welch-Compressor)
 * [Huffman Coding](https://github.com/bhrigu123/huffman-coding)
+* [Pre-trained DNN model with Arithmetic encoding](https://github.com/mohit1997/DeepZip). 
+Note that the original paper employs an RNN model. 
+To encourage users to train their own model for DCI compression, we provided a simple DNN model as the neural estimator
+The pre-trained model works for default system setup.
 
 ## Usage
 The following parameters can be configured for generalization test, 

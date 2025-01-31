@@ -78,13 +78,13 @@ class PDCCHDecoder(ParametersPDCCH):
 
         # Extend the scrambling pattern to match the length of the CRC
         extended_crc_scrambling_pattern = np.concatenate(
-            [np.zeros((self.poly - len(self.RNTI)), dtype=np.int32), self.RNTI], axis=0
+            [np.zeros((self.poly - len(self.RNTI)), dtype=int), self.RNTI], axis=0
         )
 
         # Rate matching
         if self.mode == "repetition":
             # LLRs for repeated bits are added together.
-            mtx_summation = np.zeros((self.E, self.N), dtype=np.int)
+            mtx_summation = np.zeros((self.E, self.N), dtype=int)
 
             mtx_summation[
                 np.arange(self.E), self.rate_matching_pattern[np.arange(self.E)]
@@ -117,7 +117,7 @@ class PDCCHDecoder(ParametersPDCCH):
 
         ## decramble
         descramble = (
-            tf.matmul(decoded_bits, self.deinterleaver_matrix).numpy().astype(np.int32)
+            tf.matmul(decoded_bits, self.deinterleaver_matrix).numpy().astype(int)
         )
         descramble[0, self.A :] = np.bitwise_xor(
             descramble[0, self.A :], extended_crc_scrambling_pattern

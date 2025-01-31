@@ -230,7 +230,7 @@ class CDLModel(tf.keras.Model):
             cyclic_prefix_length=self._cyclic_prefix_length,
             num_guard_carriers=[5, 6],
             dc_null=True,
-            pilot_pattern="kronecker",
+            pilot_pattern=self._pilot_pattern,
             pilot_ofdm_symbol_indices=self._pilot_ofdm_symbol_indices,
         )
         self._frequencies = subcarrier_frequencies(

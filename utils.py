@@ -96,5 +96,6 @@ def options():
         default="HC",
         type=str,
         help="Choose from HC (Huffman Coding) or LZW (Lempel-Ziv-Welch)"
+             "or DNN (Pre-trained simple DNN with Arihthmetic coding)"
     )
     return parser
